@@ -24,7 +24,7 @@ import java.util.Set;
  * Author: @SDL
  */
 public class Kunyu77 extends Spider {
-    private static final String siteUrl = "https://clbky.kyky.vip";
+    private static final String siteUrl = "http://api.kunyu77.com";
 
     private String uAgent = "Dalvik/2.1.0 (Linux; U; Android " + Build.VERSION.RELEASE + "; " + Build.MODEL + " Build/" + Build.ID + ")";
 
@@ -336,6 +336,8 @@ public class Kunyu77 extends Spider {
 
     @Override
     public String searchContent(String key, boolean quick) {
+        if (quick)
+            return "";
         try {
             String url = siteUrl + "/api.php/provide/searchVideo?searchName=" + URLEncoder.encode(key);
             String content = OkHttpUtil.string(url, getHeaders(url));
