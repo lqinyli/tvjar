@@ -44,7 +44,7 @@ public class Upyunso extends Spider {
                 return pushAgent.detailContent(list);
             }
             String jqurl=(apiUrl+list.get(0)).replace(".html","");
-            String jxUrl=new String(Base64.decode(OkHttpUtil.string(jqurl, sHeaders()), Base64.DEFAULT));
+            String jxUrl=new String(Base64.decode(OkHttpUtil.string(jqurl, Headers()), Base64.DEFAULT));
             String realUrl= new JSONObject(jxUrl).getJSONObject("result").getString("res_url");
             Matcher matcher = pattern.matcher(realUrl);
             if (!matcher.find()) {
@@ -63,12 +63,12 @@ public class Upyunso extends Spider {
         return pushAgent.playerContent(str, str2, list);
     }
 
-//    protected static HashMap<String, String> Headers() {
-//        HashMap<String, String> headers = new HashMap<>();
-//        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.62 Safari/537.36");
-//        headers.put("origin", "https://www.upyunso.com");
-//        return headers;
-//    }
+    protected static HashMap<String, String> Headers() {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.62 Safari/537.36");
+        headers.put("origin", "https://www.upyunso.com");
+        return headers;
+    }
 
     protected static HashMap<String, String> sHeaders() {
         HashMap<String, String> headers = new HashMap<>();
@@ -85,6 +85,7 @@ public class Upyunso extends Spider {
             String cover = "https://inews.gtimg.com/newsapp_bt/0/13263837859/1000";
 
             String searchurl = apiUrl + "search?keyword=" + URLEncoder.encode(key) + "&page=1&s_type=2";
+        
             String content = new String(Base64.decode(OkHttpUtil.string(searchurl, sHeaders()), Base64.DEFAULT));
             JSONArray playList = new JSONObject(content).getJSONObject("result").getJSONArray("items");
 
