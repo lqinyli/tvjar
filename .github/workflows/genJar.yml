@@ -9,6 +9,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - name: run
+      run: |
+        rm ./app/src/main/java/com/github/catvod/spider/*.java
+        cp ./Market.java ./app/src/main/java/com/github/catvod/spider
     - name: set up JDK 11
       uses: actions/setup-java@v2
       with:
